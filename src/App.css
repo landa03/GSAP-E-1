@@ -1,0 +1,40 @@
+.box{
+  width: 100px;
+  height: 101px;
+  background-color: orange;
+  position: absolute;
+  left: -100px;
+}
+
+.promo-area-left{
+  position: relative;
+  width: 450px;
+  height: fit-content;
+  display: row;
+  /* display: flex; */
+  
+  overflow: hidden;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.container{
+  overflow: hidden;
+  display: flex;
+  position: relative;
+  left: -450px;
+  width: 900px;
+  flex-direction: row-reverse;
+}
+
+.newPromo{
+  width: 400px;
+  padding: 50px;
+  text-align: center;
+}
+
+.oldPromo{
+  width: 400px;
+  padding: 50px;
+  text-align: center;
+}
