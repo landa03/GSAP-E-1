@@ -7,14 +7,17 @@ import './App.css'
 // import { TimelineMax } from 'gsap/gsap-core';
 import { Timeline } from 'gsap/gsap-core';
 
-
+let promoTitle = ["promo-1-title", "promo-2-title", "promo-3-title"];
+let promoMessage = ["promo-1", "promo-2", "promo-3"];
 
 function App() {
-  const [count, setCount] = useState(0)
+  let [count, setCount] = useState(0)
+  let [promoState, setPromoState] = useState(0);
 
-  const promoContainerRef = useRef();
+  let promoContainerRef = useRef();
 
-  var timeLine1 = new Timeline({onComplete: selectNextPromo});
+  // var timeLine1 = new Timeline({onComplete: selectNextPromo});
+  var timeLine1 = new Timeline({onStart: selectNextPromo, onComplete: restartAnimation});
   useGSAP(() => {
     timeLine1.to(promoContainerRef.current,{
         x: 450, 
@@ -26,10 +29,26 @@ function App() {
     );
   });
 
-  function selectNextPromo(){
-    console.log("next promo")
+  var oldPromoIndex = promoTitle.length - 1;
+  var newPromoIndex = 0;
+
+  function restartAnimation() {
     timeLine1.progress(0);
     timeLine1.play();
+    
+  }
+  
+  function selectNextPromo(){
+    setPromoState(promoState + 1);
+    // console.log("next promo" ,oldPromoIndex ,newPromoIndex);
+    console.log(promoTitle[oldPromoIndex], promoTitle[newPromoIndex])
+    if (newPromoIndex >= (promoTitle.length - 1)) {
+      newPromoIndex = 0;
+      oldPromoIndex = promoTitle.length - 1;
+    }else {
+      newPromoIndex ++;
+      oldPromoIndex = newPromoIndex - 1;
+    }
   }
 
   return (
@@ -44,24 +63,21 @@ function App() {
         
         <div className='newPromo'>
           <div className='title'>
-            Tailored software, perfect fit.
+            {promoTitle[newPromoIndex]}
+            {/* Tailored software, perfect fit. */}
             {/* {promoMessage['promo-1-title']} */}
           </div>
           <div className='message'>
-            We design software uniquely built to fit your business goals,
-            ensuring seamless integration and maximum efficency.
-            {/* {promoMessage['promo-1-content']} */}
+            {promoMessage[newPromoIndex]}
           </div>
         </div>
         
         <div className='oldPromo'>
           <div className='title'>
-            Gay software, perfect fit.
-            {/* {promoMessage['promo-1-title']} */}
+            {promoTitle[oldPromoIndex]}
           </div>
           <div className='message'>
-            It fits up your ass
-            {/* {promoMessage['promo-1-content']} */}
+            {promoMessage[oldPromoIndex]}
           </div>
         </div>
 

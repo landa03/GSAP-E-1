@@ -24,7 +24,7 @@
   position: relative;
   left: -450px;
   width: 900px;
-  flex-direction: row-reverse;
+  flex-direction: reverse;
 }
 
 .newPromo{
