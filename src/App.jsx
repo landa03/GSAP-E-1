@@ -7,12 +7,15 @@ import './App.css'
 // import { TimelineMax } from 'gsap/gsap-core';
 import { Timeline } from 'gsap/gsap-core';
 
-let promoTitle = ["promo-1-title", "promo-2-title", "promo-3-title"];
-let promoMessage = ["promo-1", "promo-2", "promo-3"];
 
 function App() {
-  let [count, setCount] = useState(0)
-  let [promoState, setPromoState] = useState(0);
+  let promoTitle = ["promo-1-title", "promo-2-title", "promo-3-title"];
+  let promoMessage = ["promo-1", "promo-2", "promo-3"];
+
+  // let [count, setCount] = useState(0)
+  
+  const [oldPromoState, setOldPromoState] = useState(promoTitle.length - 1);
+  const [newPromoState, setNewPromoState] = useState(0);
 
   let promoContainerRef = useRef();
 
@@ -33,22 +36,28 @@ function App() {
   var newPromoIndex = 0;
 
   function restartAnimation() {
+    // setNewPromoState(newPromoIndex);
+    // setOldPromoState(oldPromoIndex);
     timeLine1.progress(0);
     timeLine1.play();
+    console.log(promoMessage[oldPromoState], promoMessage[newPromoState]);
     
   }
   
   function selectNextPromo(){
-    setPromoState(promoState + 1);
+    // setPromoState(promoState + 1);
     // console.log("next promo" ,oldPromoIndex ,newPromoIndex);
-    console.log(promoTitle[oldPromoIndex], promoTitle[newPromoIndex])
+    console.log(promoTitle[oldPromoIndex], promoTitle[newPromoIndex]);
     if (newPromoIndex >= (promoTitle.length - 1)) {
       newPromoIndex = 0;
       oldPromoIndex = promoTitle.length - 1;
     }else {
       newPromoIndex ++;
+      setNewPromoState(newPromoIndex);
       oldPromoIndex = newPromoIndex - 1;
     }
+    // setNewPromoState(newPromoIndex);
+    // setOldPromoState(oldPromoIndex);
   }
 
   return (
