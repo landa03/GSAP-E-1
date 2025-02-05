@@ -18,6 +18,11 @@ function App() {
   // const [newPromoState, setNewPromoState] = useState(0);
 
   let promoContainerRef = useRef();
+  
+  let promoContainerDisplacement = (promoTitle.length * 450) + 450;
+
+  let promoContainerStyleLeft = "left:".concat(promoContainerDisplacement.toString(),"px;")
+  // console.log(promoContainerStyleLeft);
 
   // var timeLine1 = new Timeline({onComplete: selectNextPromo});
   // var timeLine1 = new Timeline({onStart: selectNextPromo, onComplete: restartAnimation});
@@ -74,7 +79,8 @@ function App() {
     <div className='promo-area-left'>
 
 
-      <div className='container' ref={promoContainerRef}>
+      <div className='container' ref={promoContainerRef} style={promoContainerStyleLeft}>
+      {/* <div className='container' ref={promoContainerRef}> */}
         
         {promoTitle.map((promoTitle, index) =>(
 
