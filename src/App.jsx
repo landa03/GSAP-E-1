@@ -12,20 +12,13 @@ function App() {
   let promoTitle = ["promo-1-title", "promo-2-title", "promo-3-title"];
   let promoMessage = ["promo-1", "promo-2", "promo-3"];
 
-  // let [count, setCount] = useState(0)
-  
-  // const [oldPromoState, setOldPromoState] = useState(promoTitle.length - 1);
-  // const [newPromoState, setNewPromoState] = useState(0);
-
   let promoContainerRef = useRef();
   
   let promoContainerDisplacement = (promoTitle.length * 450) + 450;
 
-  let promoContainerStyleLeft = "left:".concat(promoContainerDisplacement.toString(),"px;")
-  // console.log(promoContainerStyleLeft);
+  let promoContainerStyleLeft = "-".concat(promoContainerDisplacement.toString(), "px");
+  let promoContainerStyleWidth = promoContainerDisplacement.toString().concat("px");
 
-  // var timeLine1 = new Timeline({onComplete: selectNextPromo});
-  // var timeLine1 = new Timeline({onStart: selectNextPromo, onComplete: restartAnimation});
   var timeLine1 = new Timeline();
   useGSAP(() => {
     timeLine1.to(promoContainerRef.current,{
@@ -33,7 +26,6 @@ function App() {
         duration: 3,
         delay: 3,
         repeat: -1,
-        // repeat: promoTitle.length,
         repeatDelay: 3,
       }
     );
@@ -43,34 +35,12 @@ function App() {
     // });
   });
 
-  // var oldPromoIndex = promoTitle.length - 1;
-  // var newPromoIndex = 0;
-
-  // function restartAnimation() {
-    // setNewPromoState(newPromoIndex);
-    // setOldPromoState(oldPromoIndex);
-    // timeLine1.progress(0);
-    // timeLine1.play();
-    // console.log(promoMessage[oldPromoState], promoMessage[newPromoState]);
-    
-  // }
-  
-  // function selectNextPromo(){
-    // setPromoState(promoState + 1);
-    // console.log("next promo" ,oldPromoIndex ,newPromoIndex);
-    // console.log(promoTitle[oldPromoIndex], promoTitle[newPromoIndex]);
-    // if (newPromoIndex >= (promoTitle.length - 1)) {
-      // newPromoIndex = 0;
-      // oldPromoIndex = promoTitle.length - 1;
-    // }else {
-      // newPromoIndex ++;
-      // setNewPromoState(newPromoIndex);
-      // oldPromoIndex = newPromoIndex - 1;
-    // }
-    // setNewPromoState(newPromoIndex);
-    // setOldPromoState(oldPromoIndex);
-  // }
-
+  let containerStyle = {
+    left: promoContainerStyleLeft,
+    width: promoContainerStyleWidth,
+    // left: '-1800px',
+    // width: '1800px'
+  };
   return (
     // <div className='App'>
 
@@ -79,9 +49,11 @@ function App() {
     <div className='promo-area-left'>
 
 
-      <div className='container' ref={promoContainerRef} style={promoContainerStyleLeft}>
-      {/* <div className='container' ref={promoContainerRef}> */}
-        
+      {/* <div className='container' ref={promoContainerRef} style={promoContainerStyleLeft}> */}
+      {/* <div className='container' ref="promoContainerRef"> */}
+      {/* <div className='container' ref={promoContainerRef} id="pliz"> */}
+      <div className='container' ref={promoContainerRef} style={containerStyle}>
+
         {promoTitle.map((promoTitle, index) =>(
 
           <div className='newPromo'>

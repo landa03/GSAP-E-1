@@ -25,11 +25,14 @@
   /* left: -450px; */
   /* left: -900px; */
   /* width: 900px; */
-  width: fit-content;
+  /* width: fit-content; */
+  width: 1800px;
   flex-direction: reverse;
 }
 
 .newPromo{
+  margin: 0px;
+  border: 0px;
   width: 400px;
   padding: 50px;
   text-align: center;
@@ -37,6 +40,8 @@
 }
 
 .oldPromo{
+  margin: 0px;
+  border: 0px;
   width: 400px;
   padding: 50px;
   text-align: center;
