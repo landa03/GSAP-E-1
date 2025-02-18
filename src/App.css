@@ -13,7 +13,7 @@
   display: row;
   /* display: flex; */
   
-  /* overflow: hidden; */
+  overflow: hidden;
   justify-content: flex-start;
   align-items: center;
 }
@@ -27,7 +27,7 @@
   /* width: 900px; */
   /* width: fit-content; */
   width: 1800px;
-  flex-direction: reverse;
+  flex-direction: row-reverse;
 }
 
 .newPromo{
