@@ -9,8 +9,8 @@ import { Timeline } from 'gsap/gsap-core';
 
 
 function App() {
-  let promoTitle = ["promo-1-title", "promo-2-title", "promo-3-title"];
-  let promoMessage = ["promo-1", "promo-2", "promo-3"];
+  let promoTitle = ["promo-1-title", "promo-2-title", "promo-3-title", "promo-4-title", "promo-5-title"];
+  let promoMessage = ["promo-1", "promo-2", "promo-3", "promo-4", "promo-5"];
 
   let promoContainerRef = useRef();
   
@@ -21,31 +21,32 @@ function App() {
   
   // let timeLine1 = new Timeline({onComplete:movePromo(450)});
   let timeLine1 = new Timeline();
-
+  
   useGSAP(() => {
     timeLine1.to(promoContainerRef.current,{
-        x: 450, 
-        // x: promoContainerDisplacement - 450, 
-        duration: 3,
-        delay: 3,
-        // repeat: -1,
-        // repeat: 5,
-        repeatDelay: 3,
-        // onComplete: killAnimation(),
-        onComplete:()=>{
-          movePromo(450);
-        }
+      x: 450, 
+      // x: promoContainerDisplacement - 450, 
+      duration: 3,
+      delay: 3,
+      // repeat: -1,
+      // repeat: 5,
+      repeatDelay: 3,
+      // onComplete: killAnimation(),
+      onComplete:()=>{
+        movePromo(450);
       }
-    );
-    // timeLine1.to(promoContainerRef.current,{
-      // x: -(450 * promoTitle.length),
-      // duration: 0,
+    }
+  );
+  // timeLine1.to(promoContainerRef.current,{
+    // x: -(450 * promoTitle.length),
+    // duration: 0,
     // });
   });
-
+  
   let diplayedPromotionIndex = 0;
   let promoContainerDisplacementInverted = promoContainerDisplacement * -1;
   function movePromo(distance) {
+    console.log(promoContainerStyleWidth);
     diplayedPromotionIndex ++;
     promoContainerDisplacementInverted = promoContainerDisplacementInverted + distance;
     console.log(promoContainerDisplacementInverted);
