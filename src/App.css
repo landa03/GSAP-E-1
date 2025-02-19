@@ -13,7 +13,7 @@
   display: row;
   /* display: flex; */
   
-  /* overflow: hidden; */
+  overflow: hidden;
   justify-content: flex-start;
   align-items: center;
 }

@@ -7,25 +7,30 @@ import './App.css'
 // import { TimelineMax } from 'gsap/gsap-core';
 import { Timeline } from 'gsap/gsap-core';
 
-
+/*las variables requieren nombres mas consistentes y adecuados */
 function App() {
-  let promoTitle = ["promo-1-title", "promo-2-title", "promo-3-title", "promo-4-title", "promo-5-title"];
-  let promoMessage = ["promo-1", "promo-2", "promo-3", "promo-4", "promo-5"];
+  // let promoTitle = ["promo-1-title", "promo-2-title", "promo-3-title", "promo-4-title", "promo-5-title", "promo-6-title", "promo-7-title", "promo-8-title"];
+  // let promoMessage = ["promo-1", "promo-2", "promo-3", "promo-4", "promo-5", "promo-6", "promo-7", "promo-8"];
+  let promoTitle = ["promo-1-title", "promo-2-title", "promo-3-title"];
+  let promoMessage = ["promo-1", "promo-2", "promo-3"];
 
   let promoContainerRef = useRef();
+
+  // let promoSegmentWidth = 450;
+  let promoSegmentWidth = 450;
   
-  let promoContainerDisplacement = (promoTitle.length * 450);
+  let promoContainerDisplacement = (promoTitle.length * promoSegmentWidth);
 
   let promoContainerStyleLeft = "-".concat((promoContainerDisplacement).toString(), "px");
-  let promoContainerStyleWidth = (promoContainerDisplacement + 450).toString().concat("px");
+  let promoContainerStyleWidth = (promoContainerDisplacement + promoSegmentWidth).toString().concat("px");
   
-  // let timeLine1 = new Timeline({onComplete:movePromo(450)});
+  // let timeLine1 = new Timeline({onComplete:movePromo(promoSegmentWidth)});
   let timeLine1 = new Timeline();
   
   useGSAP(() => {
     timeLine1.to(promoContainerRef.current,{
-      x: 450, 
-      // x: promoContainerDisplacement - 450, 
+      x: promoSegmentWidth, 
+      // x: promoContainerDisplacement - promoSegmentWidth, 
       duration: 3,
       delay: 3,
       // repeat: -1,
@@ -33,7 +38,7 @@ function App() {
       repeatDelay: 3,
       // onComplete: killAnimation(),
       onComplete:()=>{
-        movePromo(450);
+        movePromo(promoSegmentWidth);
       }
     }
   );
@@ -43,35 +48,42 @@ function App() {
     // });
   });
   
-  let diplayedPromotionIndex = 0;
   let promoContainerDisplacementInverted = promoContainerDisplacement * -1;
-  function movePromo(distance) {
-    console.log(promoContainerStyleWidth);
-    diplayedPromotionIndex ++;
-    promoContainerDisplacementInverted = promoContainerDisplacementInverted + distance;
-    console.log(promoContainerDisplacementInverted);
-    if (promoContainerDisplacementInverted == 0) {
-      promoContainerDisplacementInverted = promoContainerDisplacementInverted - promoContainerDisplacement
-    }
-    let newPromoPosition = "left:".concat(promoContainerDisplacementInverted, "px");
-    let promoDiplayersArray = document.getElementsByClassName("container");
-    console.log(newPromoPosition);
-    for (let index = 0; index < promoDiplayersArray.length; index++) {
-      // console.log(index);
-      promoDiplayersArray[index].setAttribute('style', newPromoPosition);
-    }
-    timeLine1.progress(0);
-    timeLine1.resume();
-    // console.log("poop");
-  }
-
   let containerStyle = {
     left: promoContainerStyleLeft,
     width: promoContainerStyleWidth,
     // left: '-1800px',
     // width: '1800px'
   };
-  console.log(promoContainerStyleLeft);
+  
+  function movePromo(distance) {
+    // console.log(promoContainerStyleWidth);
+    promoContainerDisplacementInverted = promoContainerDisplacementInverted + distance;
+    // console.log(promoContainerDisplacementInverted);
+
+    if (promoContainerDisplacementInverted == 0) {
+      promoContainerDisplacementInverted = promoContainerDisplacementInverted - promoContainerDisplacement;
+    }
+
+    // let newPromoPosition = "left:".concat(promoContainerDisplacementInverted, "px");
+    let newPromoPosition = promoContainerDisplacementInverted.toString().concat("px");
+    let promoDiplayersArray = document.getElementsByClassName("container");
+    // console.log(newPromoPosition);
+
+    for (let index = 0; index < promoDiplayersArray.length; index++) {
+      // console.log(index);
+      // promoDiplayersArray[index].setAttribute('style', newPromoPosition); /*al modificar el atributo no se sovrelapa con otras modificacionese */
+      // containerStyle.width = promoDiplayersArray /*la variable es un read only */
+      promoDiplayersArray[index].style.left = newPromoPosition;
+    }
+
+    timeLine1.progress(0);
+    timeLine1.resume();
+    // console.log("poop");
+  }
+
+
+  // console.log(promoContainerStyleLeft);
   return (
     // <div className='App'>
 
@@ -86,8 +98,6 @@ function App() {
           <div className='newPromo'>
             <div className='title'>
               {promoTitle}
-              {/* Tailored software, perfect fit. */}
-              {/* {promoMessage['promo-1-title']} */}
             </div>
             <div className='message'>
               {promoMessage[index]}
@@ -109,10 +119,6 @@ function App() {
       
     </div>
   )
-  
-  // return(
-  //   <div>poop</div>
-  // )
 }
 
 export default App
